@@ -1,15 +1,14 @@
 package me.liiot.string_array;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 /*
-01) MeetingRoom
+01) Meeting Room
 주어진 배열에는 하나의 회의실에 예약된 모든 사람들의 회의 시작 시간과 종료 시간이 담겨져 있습니다.
 각 원소는 [시작 시간, 종료 시간](시작 시간 < 종료 시간)을 뜻하며,
 모든 회의의 시간 간격을 고려하여 하나의 회의실에서 모든 회의가 열릴 수 있는지 확인합니다.
 */
-
-import java.util.Arrays;
-import java.util.Comparator;
-
 class Interval {
     int start;
     int end;
