@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>Basic XML Property file.</comment>
+<entry key="WriterHome">http://www.GodOfJava.com</entry>
+<entry key="Writer">Lora</entry>
+</properties>
