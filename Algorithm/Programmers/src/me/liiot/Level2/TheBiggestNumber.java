@@ -2,6 +2,7 @@ package me.liiot.Level2;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.regex.Pattern;
 
 /*
 가장 큰 수
@@ -10,7 +11,7 @@ public class TheBiggestNumber {
 
     public static void main(String[] args) {
 
-        int[] numbers = {3, 30, 34, 5, 9};
+        int[] numbers = {0, 0, 0, 0, 0};
         System.out.println(solution(numbers));
     }
 
@@ -22,20 +23,19 @@ public class TheBiggestNumber {
             strings[i] = String.valueOf(numbers[i]);
         }
 
-        Comparator<Integer> comp = new Comparator<Integer>() {
+        Comparator<String> comp = new Comparator<String>() {
             @Override
-            public int compare(Integer o1, Integer o2) {
-                char[] c1 = String.valueOf(o1).toCharArray();
-                char[] c2 = String.valueOf(o2).toCharArray();
-
-                return 0;
+            public int compare(String o1, String o2) {
+                return (o2 + o1).compareTo(o1 + o2);
             }
         };
 
-        Arrays.sort(strings, Comparator.reverseOrder());
+        Arrays.sort(strings, comp);
         StringBuilder builder = new StringBuilder();
         for (String s : strings) {
             builder.append(s);
+            if (Pattern.matches("0+", builder))
+                return "0";
         }
 
         return builder.toString();

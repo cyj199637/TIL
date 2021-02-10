@@ -9,7 +9,7 @@ public class NumberOf124Country {
 
     public static void main(String[] args) {
 
-        System.out.println(solution(15));
+        System.out.println(solution(14));
     }
 
     public static String solution(int n) {
@@ -18,6 +18,8 @@ public class NumberOf124Country {
         while (n != 0) {
             if (n % 3 == 0) {
                 stack.add("4");
+                n = (n / 3) - 1;
+                continue;
             } else if (n % 3 == 1) {
                 stack.add("1");
             } else if (n % 3 == 2){
