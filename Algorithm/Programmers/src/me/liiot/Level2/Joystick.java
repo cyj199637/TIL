@@ -5,14 +5,26 @@ import java.util.Arrays;
 /*
 조이스틱
  */
+
+class Move {
+
+    int nextIndex;
+    int count;
+
+    public Move (int nextIndex, int count) {
+        this.nextIndex = nextIndex;
+        this.count = count;
+    }
+}
+
 public class Joystick {
 
     static int length;
 
     public static void main(String[] args) {
 
-        length = "JAZ".length();
-        System.out.println(solution("JAZ"));
+        length = "BBBAAB".length();
+        System.out.println(solution("BBBAAB"));
     }
 
     public static int solution(String name) {
@@ -31,11 +43,19 @@ public class Joystick {
         int count = 0;
         int cur = 0;
         while(!Arrays.equals(isChanged, allTrue)) {
-
             count += Math.min(up('A', after[cur]), down('A', after[cur]));
             isChanged[cur] = true;
-            count += Math.min(left(cur, isChanged), right(cur, isChanged));
-            cur++;
+
+            Move leftMove = left(cur, isChanged, allTrue);
+            Move rightMove = right(cur, isChanged, allTrue);
+
+            if (leftMove.count < rightMove.count) {
+                count += leftMove.count;
+                cur = leftMove.nextIndex;
+            } else {
+                count += rightMove.count;
+                cur = rightMove.nextIndex;
+            }
         }
 
         return count;
@@ -61,23 +81,23 @@ public class Joystick {
         return count;
     }
 
-    public static int left(int cur, boolean[] isChanged) {
+    public static Move left(int cur, boolean[] isChanged, boolean[] allTrue) {
 
         int count = 0;
-        while (isChanged[cur]) {
+        while (isChanged[cur] && !Arrays.equals(isChanged, allTrue)) {
             cur = (cur == 0) ? length - 1 : cur - 1;
             count++;
         }
-        return count;
+        return new Move(cur, count);
     }
 
-    public static int right(int cur, boolean[] isChanged) {
+    public static Move right(int cur, boolean[] isChanged, boolean[] allTrue) {
 
         int count = 0;
-        while (isChanged[cur]) {
+        while (isChanged[cur] && !Arrays.equals(isChanged, allTrue)) {
             cur = (cur == (length - 1)) ? 0 : cur + 1;
             count++;
         }
-        return count;
+        return new Move(cur, count);
     }
 }
